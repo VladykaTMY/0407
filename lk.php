@@ -70,15 +70,15 @@
                 edit_buttons[i].hidden = true;
             });
             cancel_buttons[i].addEventListener("click", () => {
-                edit_buttons[i].previousElementSibling.innerText = inputVаlue;
+                edit_buttons[i].previousElementSibling.innerHTML = inputValue;
                 save_buttons[i].hidden = true;
                 cancel_buttons[i].hidden = true;
                 edit_buttons[i].hidden = false;
-            });
+            })
 
             save_buttons[i].addEventListener("click", async () => {
                 let newInputValue = edit_buttons[i].previousElementSibling.innerText = edit_buttons[i].previousElementSibling.firstElementChild.value;
-
+                inputValue = newInputValue;
                 save_buttons[i].hidden = true;
                 cancel_buttons[i].hidden = true;
                 edit_buttons[i].hidden = false;

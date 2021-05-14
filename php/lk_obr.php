@@ -12,4 +12,5 @@ if ($mysqli == false) {
     $id = $_SESSION['id'];
     $mysqli->query("UPDATE `users` SET `$item`='$inputValue' WHERE `id`='$id'");
     $_SESSION[$item] = $inputValue;
+    session_start();
 }
