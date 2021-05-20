@@ -1,4 +1,5 @@
 <?php
+session_start();
 $url = explode("/", $_SERVER['REQUEST_URI']);
 require_once("php/classes/User.php");
 require_once("php/db.php");
@@ -10,8 +11,10 @@ if ($url[1] == auth) {
 } else if ($url[1] == users) {
     require_once("pages/users/index.html");
 } else if ($url[1] == addUser) {
-    User::addUser();
-} else {
+    echo User::addUser($_POST['name'], $_POST['lastname'], $_POST['email'], $_POST['pass']);
+}else if($url[1] == authUser) {
+echo User::authUser($_POST['email'],$_POST['pass']);
+}else {
     $content = file_get_contents("pages/index.php");
 }
 

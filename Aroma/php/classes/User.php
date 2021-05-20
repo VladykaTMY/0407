@@ -5,7 +5,6 @@ class User
     private $lastname;
     private $email;
     private $id;
-
     function __construct($id, $name, $lastname, $email)
     {
         $this->id = $id;
@@ -13,7 +12,6 @@ class User
         $this->lastname = $lastname;
         $this->email = $email;
     }
-
     function getId()
     {
         return $this->id;
@@ -31,15 +29,21 @@ class User
         return $this->email;
     }
     //статический метод добавления пользователя
-    static function addUser($name,$lastname,$email,$pass)
+    static function addUser($name, $lastname, $email, $pass)
     {
         global $mysqli;
-        $email = trim(mb_strtolower($_POST['email']));
-        $pass = trim($_POST['pass']);
-        $pass = password_hash("$pass", PASSWORD_DEFAULT);
-        $result = $mysqli->query("SELECT * FROM `users` WHERE `email` = '$email'");
-        if($result->num_rows != 0) {
-            return json_encode(["result"=>"success"]);
-        }
+        $email = mb_strtolower(trim($email));
+        $pass = trim($pass);
+        $pass = password_hash($pass, PASSWORD_DEFAULT);
+        $result = $mysqli->query("SELECT * FROM `users` WHERE `email`='$email'");
+        if ($result->num_rows != 0)
+            return json_encode(["result" => "exist"]);
+        $mysqli->query("INSERT INTO `users`(`name`, `lastname`, `email`, `pass`) VALUES ('$name','$lastname','$email','$pass')");
+        return json_encode(["result" => "success"]);
+    }
+
+    static function authUser($email, $pass)
+    {
+        global $mysqli;
     }
 }
