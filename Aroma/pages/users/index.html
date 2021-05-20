@@ -83,7 +83,7 @@
 					>
 						<a
 							class="nav-link"
-							id="v-pills-profile-tab"
+							id="profileTab"
 							data-toggle="pill"
 							href="#v-pills-profile"
 							role="tab"
@@ -93,7 +93,7 @@
 						>
 						<a
 							class="nav-link"
-							id="v-pills-messages-tab"
+							id="messagesTab"
 							data-toggle="pill"
 							href="#v-pills-messages"
 							role="tab"
@@ -103,7 +103,7 @@
 						>
 						<a
 							class="nav-link"
-							id="v-pills-settings-tab"
+							id="settingsTab"
 							data-toggle="pill"
 							href="#v-pills-settings"
 							role="tab"
@@ -114,30 +114,122 @@
 					</div>
 				</div>
 				<div class="col-9">
-					<div class="tab-content" id="v-pills-tabContent">
+					<div class="tab-content my-3" id="v-pills-tabContent">
 						<div
 							class="tab-pane fade"
-							id="profileTab"
+							id="v-pills-profile"
 							role="tabpanel"
 							aria-labelledby="v-pills-profile-tab"
 						>
-							Страница профиля
+							<div class="row">
+								<div class="col-sm-3">
+									<img
+										src="https://png.pngtree.com/png-vector/20190704/ourmid/pngtree-vector-user-young-boy-avatar-icon-png-image_1538408.jpg"
+										alt=""
+										width="100%"
+									/>
+								</div>
+								<div class="col-sm-9">
+									<h1>Василий Пупкин</h1>
+									<h3>О себе</h3>
+									<p>
+										Lorem ipsum dolor sit amet consectetur, adipisicing elit. Alias officiis totam
+										cupiditate, praesentium nesciunt eaque provident facere deleniti saepe laborum
+										esse autem assumenda tenetur harum ex maxime perferendis fugit. Accusantium.
+									</p>
+								</div>
+							</div>
 						</div>
 						<div
 							class="tab-pane fade"
-							id="messagesTab"
+							id="v-pills-messages"
 							role="tabpanel"
 							aria-labelledby="v-pills-messages-tab"
 						>
-							Страница с сообщениями
+							<div class="row">
+								<div class="col-sm-3">
+									<div class="row">
+										<div class="col-3">
+											<img
+												src="https://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png"
+												width="100%"
+												alt=""
+											/>
+											<!-- https://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png -->
+										</div>
+										<div class="col-9">
+											<div>
+												<h5>Анатолий Сидоров</h5>
+												<p>Ха, действительно смешно)</p>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-3">
+											<img
+												src="https://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png"
+												width="100%"
+												alt=""
+											/>
+										</div>
+										<div class="col-9">
+											<div>
+												<h5>Семен Семеныч</h5>
+												<p>Нет, завтра я не смогу</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-9">
+									<div class="row">
+										<div class="col-12 border">
+											<div class="row">
+												<div class="col-1">
+													<img
+														src="https://png.pngtree.com/png-vector/20190704/ourmid/pngtree-vector-user-young-boy-avatar-icon-png-image_1538408.jpg"
+														width="100%"
+														alt=""
+													/>
+												</div>
+												<div class="col-11">
+													<h6 >Василий Пупкин</h6>
+													<p>Поехали завтра на шашлыки?</p>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-1">
+													<img
+														src="https://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png"
+														width="100%"
+														alt=""
+													/>
+												</div>
+												<div class="col-11">
+													<h6>Семен Семеныч</h6>
+													<p>Нет, завтра я не смогу</p>
+												</div>
+											</div>
+										</div>
+										<div class="col-9">
+											<textarea name="" id="" cols="30" rows="1" class="form-control"></textarea>
+										</div>
+										<div class="col-3">
+											<button class="btn btn-warning">Отправить</button>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 						<div
 							class="tab-pane fade"
-							id="settingsTab"
+							id="v-pills-settings"
 							role="tabpanel"
 							aria-labelledby="v-pills-settings-tab"
 						>
-							Страница с настройками
+							<h1>Настройки страницы</h1>
+							<p>Имя: <span>Василий</span><span>[изменить]</span></p>
+							<p>Фамилия: <span>Пупкин</span><span>[изменить]</span></p>
+							<p>[изменить пароль]</p>
 						</div>
 					</div>
 				</div>
@@ -165,6 +257,7 @@
 			} else {
 				location.href = location.protocol + "//" + location.host;
 			}
+			//document.getElementById(pathname + "Tab").classList.add("show");
 			document.getElementById(pathname + "Tab").classList.add("active");
 
 			let navLinks = document.querySelectorAll(".nav-link");

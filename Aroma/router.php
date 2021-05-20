@@ -1,17 +1,21 @@
 <?php
 $url = explode("/", $_SERVER['REQUEST_URI']);
+require_once("php/classes/User.php");
+require_once("php/db.php");
 
-if($url[1] == auth){
+if ($url[1] == auth) {
     $content = file_get_contents("pages/login.php");
-}else if($url[1] == reg){
+} else if ($url[1] == reg) {
     $content = file_get_contents("pages/register.html");
-}else if($url[1] == users) {
-require_once("pages/users/index.html");
-}else{
+} else if ($url[1] == users) {
+    require_once("pages/users/index.html");
+} else if ($url[1] == addUser) {
+    User::addUser();
+} else {
     $content = file_get_contents("pages/index.php");
 }
 
-if(!empty($content)) require_once("template.php");
+if (!empty($content)) require_once("template.php");
 
 // if($url[1] == blog) {
 //     require_once("blog.php");
