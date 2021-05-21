@@ -111,6 +111,16 @@
 							aria-selected="false"
 							>Настройки</a
 						>
+						<a
+							class="nav-link"
+							id="friendsTab"
+							data-toggle="pill"
+							href="#v-pills-friends"
+							role="tab"
+							aria-controls="v-pills-friends"
+							aria-selected="false"
+							>Друзья</a
+						>
 					</div>
 				</div>
 				<div class="col-9">
@@ -130,7 +140,7 @@
 									/>
 								</div>
 								<div class="col-sm-9">
-									<h1>Василий Пупкин</h1>
+									<h1 id="userName"></h1>
 									<h3>О себе</h3>
 									<p>
 										Lorem ipsum dolor sit amet consectetur, adipisicing elit. Alias officiis totam
@@ -192,7 +202,7 @@
 													/>
 												</div>
 												<div class="col-11">
-													<h6 >Василий Пупкин</h6>
+													<h6>Василий Пупкин</h6>
 													<p>Поехали завтра на шашлыки?</p>
 												</div>
 											</div>
@@ -231,6 +241,25 @@
 							<p>Фамилия: <span>Пупкин</span><span>[изменить]</span></p>
 							<p>[изменить пароль]</p>
 						</div>
+						<div
+							class="tab-pane fade"
+							id="v-pills-friends"
+							role="tabpanel"
+							aria-labelledby="v-pills-friends-tab"
+						>
+							<h1>Страница всех друзей</h1>
+							<table class="table">
+								<thead>
+									<tr>
+										<th scope="col">#</th>
+										<th scope="col">Имя</th>
+										<th scope="col">Фамилия</th>
+										<th scope="col">Email</th>
+									</tr>
+								</thead>
+								<tbody id="usersListTable"></tbody>
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -247,13 +276,43 @@
 		></script>
 		<script>
 			let pathname = location.pathname.split("/")[2];
+			let user;
+			async function getUser() {
+				let responce = await fetch("/getUser");
+				return await responce.json();
+			}
+			async function getUsers() {
+				let responce = await fetch("/getUsers");
+				return await responce.json();
+			}
 
 			if (pathname == "profile") {
+				user = getUser();
+				getUser().then((user) => {
+					userName.innerText = `${user.name} ${user.lastname}`;
+				});
+
 				$("#v-pills-profile-tab").tab("show");
 			} else if (pathname == "messages") {
 				$("#v-pills-messages-tab").tab("show");
 			} else if (pathname == "settings") {
 				$("#v-pills-settings-tab").tab("show");
+			} else if (pathname == "friends") {
+				getUsers().then((users) => {
+					for (let i = 0; i < users.length; i++)
+						usersListTable.insertAdjacentHTML(
+							"beforeend",
+							` <tr>
+						<th scope="row">${users[i].id}</th>
+						<td>${users[i].name}</td>
+						<td>${users[i].lastname}</td>
+						<td>${users[i].email}</td>
+						</tr>`
+						);
+
+					console.log(users);
+				});
+				$("#v-pills-friends-tab").tab("show");
 			} else {
 				location.href = location.protocol + "//" + location.host;
 			}

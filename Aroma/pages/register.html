@@ -42,6 +42,7 @@
 						<div class="col-md-12 form-group">
 							<input type="email" class="form-control" name="email" placeholder="Email" />
 						</div>
+						<p id="info" style="color: red"></p>
 						<div class="col-md-12 form-group">
 							<input type="password" class="form-control" name="pass" placeholder="Пароль" />
 						</div>
@@ -64,13 +65,41 @@
 	</div>
 </section>
 <!--================End Login Box Area =================-->
+
+<!-- Модальное окно -->
+<div
+	class="modal fade"
+	id="myModal"
+	tabindex="-1"
+	aria-labelledby="exampleModalLabel"
+	aria-hidden="true"
+>
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Регистрация прошла успешно!</h5>
+			</div>
+			<div class="modal-body">Вы будете перенаправлены в личный кабинет через 3 секунды.</div>
+		</div>
+	</div>
+</div>
+
 <script>
 	async function sendForm(form) {
+		info.innerText = ``;
 		let formData = new FormData(form);
 		let responce = await fetch("addUser", {
 			method: "POST",
 			body: formData,
 		});
-		console.log(await responce.json());
+		let res = await responce.json();
+		if (res.result == "success") {
+			$("#myModal").modal("show");
+			setTimeout(() => {
+				location.href = "auth";
+			}, 3000);
+		} else if (res.result == "exist") {
+			info.innerText = `Такой пользователь уже есть!`;
+		}
 	}
 </script>
