@@ -37,7 +37,9 @@ class User
         $pass = trim($pass);
         $pass = password_hash($pass, PASSWORD_DEFAULT);
         $result = $mysqli->query("SELECT * FROM `users` WHERE `email`='$email'");
-        if ($result->num_rows != 0) return json_encode(["result" => "exist"]);
+        if ($result->num_rows != 0) 
+            return json_encode(["result" => "exist"]);
+        }else{
         $mysqli->query("INSERT INTO `users`(`name`, `lastname`, `email`, `pass`) VALUES ('$name','$lastname','$email','$pass')");
         return json_encode(["result" => "success"]);
     }
